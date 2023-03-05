@@ -1,5 +1,7 @@
 module Integration::Pipedriver
   class CreatePerson < Base
+    REQUIRED_PERSON_NAME = "Por favor, forneça o 'nome' do contato para prosseguir. Este campo é obrigatório."
+
     def call
       create
     end
@@ -7,7 +9,7 @@ module Integration::Pipedriver
     private
 
     def create
-      raise RequiredPersonName if @params[:name].blank?
+      raise StandardError, REQUIRED_PERSON_NAME if @params[:name].blank?
 
       puts 'Person#create'
     end

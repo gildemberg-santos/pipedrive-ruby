@@ -1,5 +1,7 @@
 module Integration::Pipedriver
   class CreateLead < Base
+    REQUIRED_LEAD_TITLE = "Por favor, forneça o 'título' do lead para prosseguir. Este campo é obrigatório."
+    
     def call
       create
     end
@@ -7,7 +9,7 @@ module Integration::Pipedriver
     private
 
     def create
-      raise RequiredLeadTitle if @params[:title].blank?
+      raise StandardError, REQUIRED_LEAD_TITLE if @params[:title].blank?
 
       puts 'Lead#create_lead'
     end

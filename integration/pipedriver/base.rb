@@ -9,22 +9,7 @@ module Integration::Pipedriver
     private
 
     def request(endpoint, method, payload = nil)
-      @payload = payload
-      @endpoint = endpoint
-
-      HTTParty.send(method, url, { verify: true, body: body, headers: headers })
-    end
-
-    def headers
-      { 'Content-Type': 'application/json' }
-    end
-
-    def body
-      @payload.present? ? @payload.to_json : nil
-    end
-
-    def url
-      @url ||= "https://#{@company_domain}.pipedrive.com/v1/#{@endpoint}?api_token=#{@api_token}"
+      Request.new(@company_domain, @api_token).call(endpoint, method, payload)
     end
   end
 end

@@ -10,10 +10,13 @@ module Integration
       owners = Pipedriver::ListUsers.new(@company_domain, @api_token).call
       organizations = Pipedriver::ListOrganizations.new(@company_domain, @api_token).call
 
-      puts owners
-      puts organizations
+      puts "PROGRAMS ========================\n\n"
+      puts "Owners #{owners}\n\n"
+      puts "Organizations #{organizations}\n\n"
+      
       Pipedriver::CreatePerson.new(@company_domain, @api_token, @params).call
       Pipedriver::CreateLead.new(@company_domain, @api_token, @params).call
+      puts "PROGRAMS ========================"
     end
   end
 end
