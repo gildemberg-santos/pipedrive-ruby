@@ -13,7 +13,7 @@ module Integration::Pipedriver
       raise StandardError, REQUIRED_LEADLABEL_NAME if @params[:name].blank?
       raise StandardError, REQUIRED_LEADLABEL_COLOR if @params[:color].blank?
 
-      puts 'Lead#create_lead'
+      puts "LeadLabel#create #{@params}"
     end
   end
 end

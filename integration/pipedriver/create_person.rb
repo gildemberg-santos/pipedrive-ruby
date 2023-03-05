@@ -11,7 +11,7 @@ module Integration::Pipedriver
     def create
       raise StandardError, REQUIRED_PERSON_NAME if @params[:name].blank?
 
-      puts 'Person#create'
+      puts "Person#create #{@params}"
     end
   end
 end

@@ -11,7 +11,7 @@ module Integration::Pipedriver
     def create
       raise StandardError, REQUIRED_LEAD_TITLE if @params[:title].blank?
 
-      puts 'Lead#create_lead'
+      puts "Lead#create #{@params}"
     end
   end
 end
