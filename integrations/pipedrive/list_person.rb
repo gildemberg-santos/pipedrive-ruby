@@ -1,4 +1,4 @@
-module Integration::Pipedriver
+module Integrations::Pipedrive
   class ListPerson < Base
     private def response
       @response ||= find_all('persons').map do |item|

@@ -1,4 +1,4 @@
-module Integration::Pipedriver
+module Integrations::Pipedrive
   class Credential
     attr_reader :domain, :token
 

@@ -1,21 +1,21 @@
 require 'rails'
-require './integration/pipedriver_service'
-require './integration/pipedriver/credential'
-require './integration/pipedriver/base'
-require './integration/pipedriver/request'
-require './integration/pipedriver/list_user'
-require './integration/pipedriver/list_organization'
-require './integration/pipedriver/list_lead'
-require './integration/pipedriver/list_person'
-require './integration/pipedriver/list_lead_label'
-require './integration/pipedriver/list_person_field'
-require './integration/pipedriver/create_lead'
-require './integration/pipedriver/create_person'
-require './integration/pipedriver/create_lead_label'
-require './integration/pipedriver/create_organization'
 require 'httparty'
 require 'pry'
 require 'json'
+require './integrations/pipedrive_service'
+require './integrations/pipedrive/credential'
+require './integrations/pipedrive/base'
+require './integrations/pipedrive/request'
+require './integrations/pipedrive/list_user'
+require './integrations/pipedrive/list_organization'
+require './integrations/pipedrive/list_lead'
+require './integrations/pipedrive/list_person'
+require './integrations/pipedrive/list_lead_label'
+require './integrations/pipedrive/list_person_field'
+require './integrations/pipedrive/create_lead'
+require './integrations/pipedrive/create_person'
+require './integrations/pipedrive/create_lead_label'
+require './integrations/pipedrive/create_organization'
 
 COMPANY_DOMAIN = 'gilsantos-sandbox'
 API_TOKEN = '99141214036cdd7bf35e96984424be27a1be5b9f'
@@ -25,5 +25,5 @@ PARAMS = {
   color: 'red'
 }
 
-credential = ::Integration::Pipedriver::Credential.new(COMPANY_DOMAIN, API_TOKEN)
-::Integration::PipedriverService.new(credential, PARAMS).call
+credential = ::Integrations::Pipedrive::Credential.new(COMPANY_DOMAIN, API_TOKEN)
+::Integrations::PipedriveService.new(credential, PARAMS).call

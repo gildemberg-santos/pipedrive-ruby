@@ -1,15 +1,15 @@
-module Integration
-  class PipedriverService
+module Integrations
+  class PipedriveService
     def initialize(credential, params)
       @credential = credential
       @params = params
     end
 
     def call
-      owners = Pipedriver::ListUser.new(@credential).call
-      organizations = Pipedriver::ListOrganization.new(@credential).call
-      leads = Pipedriver::ListLead.new(@credential).call
-      person_fields = Pipedriver::ListPersonField.new(@credential).call
+      owners = Pipedrive::ListUser.new(@credential).call
+      organizations = Pipedrive::ListOrganization.new(@credential).call
+      leads = Pipedrive::ListLead.new(@credential).call
+      person_fields = Pipedrive::ListPersonField.new(@credential).call
 
       puts "PROGRAMS ========================"
       puts "Owners #{owners}"
@@ -27,7 +27,7 @@ module Integration
       #   phone: '(85) 99136-5507'
       # }
 
-      # response_person = Pipedriver::CreatePerson.new(@company_domain, @api_token, person).call
+      # response_person = Pipedrive::CreatePerson.new(@company_domain, @api_token, person).call
 
       # puts "Person#Create #{response_person}"
 
@@ -37,7 +37,7 @@ module Integration
       #   person_id: response_person[:id],
       #   organization_id: organizations.first[:id]
       # }
-      # response_lead = Pipedriver::CreateLead.new(@company_domain, @api_token, lead).call
+      # response_lead = Pipedrive::CreateLead.new(@company_domain, @api_token, lead).call
 
       # puts "Lead#Create #{response_lead}"
 

@@ -1,4 +1,4 @@
-module Integration::Pipedriver
+module Integrations::Pipedrive
   class CreatePerson < Base
     ENDPOINT = 'persons'
     REQUIRED_NAME = "Por favor, forneça o 'nome' do contato para prosseguir. Este campo é obrigatório."
@@ -6,7 +6,7 @@ module Integration::Pipedriver
     private
 
     def response
-      @response ||= create.deep_symbolize_keys
+      @response ||= create
       { id: @response[:id], name: @response[:name], erros: @erros }
     end
 
@@ -16,7 +16,7 @@ module Integration::Pipedriver
       result = request(ENDPOINT, :post, @params)
       @erros.push(JSON.parse(result.body)['error']) and return {} if result.code != 201
 
-      JSON.parse(result.body)['data'] || {}
+      JSON.parse(result.body)['data'].deep_symbolize_keys || {}
     end
   end
 end

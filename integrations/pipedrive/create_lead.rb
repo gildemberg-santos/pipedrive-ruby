@@ -1,4 +1,4 @@
-module Integration::Pipedriver
+module Integrations::Pipedrive
   class CreateLead < Base
     ENDPOINT = 'leads'
     REQUIRED_TITLE = "Por favor, forneça o 'título' do lead para prosseguir. Este campo é obrigatório."
@@ -6,7 +6,7 @@ module Integration::Pipedriver
     private
 
     def response
-      @response ||= create.deep_symbolize_keys
+      @response ||= create
       { id: @response[:id], title: @response[:title], erros: @erros }
     end
 
@@ -16,7 +16,7 @@ module Integration::Pipedriver
       result = request(ENDPOINT, :post, @params)
       @erros.push(JSON.parse(result.body)['error']) and return {} if result.code != 201
 
-      JSON.parse(result.body)['data'] || {}
+      JSON.parse(result.body)['data'].deep_symbolize_keys || {}
     end
   end
 end

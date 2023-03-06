@@ -1,4 +1,4 @@
-module Integration::Pipedriver
+module Integrations::Pipedrive
   class ListOrganization < Base
     ENDPOINT = 'organizations'
     

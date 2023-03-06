@@ -1,4 +1,4 @@
-module Integration::Pipedriver
+module Integrations::Pipedrive
   class Request
     def initialize(credential)
       @credential = credential

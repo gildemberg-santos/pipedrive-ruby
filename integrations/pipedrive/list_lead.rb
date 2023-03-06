@@ -1,4 +1,4 @@
-module Integration::Pipedriver
+module Integrations::Pipedrive
   class ListLead < Base
     ENDPOINT = 'leads'
 

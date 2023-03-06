@@ -1,4 +1,4 @@
-module Integration::Pipedriver
+module Integrations::Pipedrive
   class ListLeadLabel < Base
     ENDPOINT = 'leadLabels'
     
