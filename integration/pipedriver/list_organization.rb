@@ -1,19 +1,19 @@
 module Integration::Pipedriver
-  class ListUsers < Base
+  class ListOrganization < Base
     def call
-      users
+      organizations
     end
 
     private
-    
-    def users
-      @users ||= list.map do |item|
+
+    def organizations
+      @organizations ||= list.map do |item|
         { id: item['id'], name: item['name'] }
       end
     end
 
     def list
-      result = request('users', :get)
+      result = request('organizations', :get)
       return [] if result.code != 200
 
       JSON.parse(result.body)['data'] || []
