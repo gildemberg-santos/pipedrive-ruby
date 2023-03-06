@@ -1,28 +1,54 @@
 module Integration
   class PipedriverService
-    def initialize(company_domain, api_token, params)
-      @company_domain = company_domain
-      @api_token = api_token
+    def initialize(credential, params)
+      @credential = credential
       @params = params
     end
 
     def call
-      owners = Pipedriver::ListUser.new(@company_domain, @api_token).call
-      organizations = Pipedriver::ListOrganization.new(@company_domain, @api_token).call
-      leads = Pipedriver::ListLead.new(@company_domain, @api_token).call
-      persons = Pipedriver::ListPerson.new(@company_domain, @api_token).call
-      lead_labels = Pipedriver::ListLeadLabel.new(@company_domain, @api_token).call
+      owners = Pipedriver::ListUser.new(@credential).call
+      organizations = Pipedriver::ListOrganization.new(@credential).call
+      leads = Pipedriver::ListLead.new(@credential).call
+      person_fields = Pipedriver::ListPersonField.new(@credential).call
 
       puts "PROGRAMS ========================"
       puts "Owners #{owners}"
       puts "Organizations #{organizations}"
       puts "Leads #{leads}"
-      puts "Persons #{persons}"
-      puts "LeadLabels #{lead_labels}"
+      puts "Fields Person #{person_fields}"
+
+      # puts "\n\n"
       
-      Pipedriver::CreatePerson.new(@company_domain, @api_token, @params).call
-      Pipedriver::CreateLead.new(@company_domain, @api_token, @params).call
-      Pipedriver::CreateLeadLabel.new(@company_domain, @api_token, @params).call
+      # person = {
+      #   name: 'Gildemberg Santos Gomes',
+      #   owner_id: owners.first[:id],
+      #   org_id: organizations.first[:id],
+      #   email: 'gildemberg.santos@gmail.com',
+      #   phone: '(85) 99136-5507'
+      # }
+
+      # response_person = Pipedriver::CreatePerson.new(@company_domain, @api_token, person).call
+
+      # puts "Person#Create #{response_person}"
+
+      # lead = {
+      #   title: "Novo Lead",
+      #   owner_id: owners.first[:id],
+      #   person_id: response_person[:id],
+      #   organization_id: organizations.first[:id]
+      # }
+      # response_lead = Pipedriver::CreateLead.new(@company_domain, @api_token, lead).call
+
+      # puts "Lead#Create #{response_lead}"
+
+      # puts "\n\n"
+
+      # unless response_person[:erros].blank? || response_lead[:erros].blank?
+      #   erros = []
+      #   erros.push(response_person[:erros])
+      #   erros.push(response_lead[:erros])
+      #   raise StandardError, erros
+      # end
       puts "PROGRAMS ========================"
     end
   end

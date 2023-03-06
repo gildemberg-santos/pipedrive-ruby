@@ -1,15 +1,36 @@
 module Integration::Pipedriver
   class Base
-    def initialize(company_domain, api_token, params = {})
-      @company_domain = company_domain
-      @api_token = api_token
+    attr_reader :erros
+
+    def initialize(credential, params = {})
+      @erros = []
+      @credential = credential
       @params = params
+    end
+
+    def call
+      response
     end
 
     private
 
     def request(endpoint, method, payload = nil)
-      Request.new(@company_domain, @api_token).call(endpoint, method, payload)
+      Request.new(@credential).call(endpoint, method, payload)
+    end
+
+    def find_all(endpoit)
+      result = request(endpoit, :get)
+      return [] if result.code != 200
+
+      JSON.parse(result.body)['data'] || []
+    end
+
+    def create
+      raise NotImplementedError
+    end
+
+    def response
+      raise NotImplementedError
     end
   end
 end

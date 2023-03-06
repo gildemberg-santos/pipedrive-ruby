@@ -1,13 +1,7 @@
 module Integration::Pipedriver
   class ListLead < Base
-    def call
-      leads
-    end
-
-    private
-
-    def leads
-      @leads ||= list.map do |item|
+    private def response
+      @response ||= find_all('leads').map do |item|
         {
           id: item['id'],
           title: item['title'],
@@ -17,13 +11,6 @@ module Integration::Pipedriver
           person_id: item['person_id']
         }
       end
-    end
-
-    def list
-      result = request('leads', :get)
-      return [] if result.code != 200
-
-      JSON.parse(result.body)['data'] || []
     end
   end
 end

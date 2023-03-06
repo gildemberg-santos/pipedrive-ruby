@@ -1,8 +1,7 @@
 module Integration::Pipedriver
   class Request
-    def initialize(company_domain, api_token)
-      @company_domain = company_domain
-      @api_token = api_token
+    def initialize(credential)
+      @credential = credential
     end
 
     def call(endpoint, method, payload = nil)
@@ -23,7 +22,7 @@ module Integration::Pipedriver
     end
 
     def url
-      @url ||= "https://#{@company_domain}.pipedrive.com/v1/#{@endpoint}?api_token=#{@api_token}"
+      @url ||= "https://#{@credential.domain}.pipedrive.com/v1/#{@endpoint}?api_token=#{@credential.token}"
     end
   end
 end
