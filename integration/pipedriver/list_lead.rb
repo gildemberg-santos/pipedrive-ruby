@@ -1,7 +1,9 @@
 module Integration::Pipedriver
   class ListLead < Base
+    ENDPOINT = 'leads'
+
     private def response
-      @response ||= find_all('leads').map do |item|
+      @response ||= find_all(ENDPOINT).map do |item|
         {
           id: item[:id],
           title: item[:title],

@@ -24,5 +24,6 @@ PARAMS = {
   title: 'Nove Lead',
   color: 'red'
 }
+
 credential = ::Integration::Pipedriver::Credential.new(COMPANY_DOMAIN, API_TOKEN)
 ::Integration::PipedriverService.new(credential, PARAMS).call
