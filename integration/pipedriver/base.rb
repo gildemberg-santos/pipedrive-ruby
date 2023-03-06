@@ -22,7 +22,7 @@ module Integration::Pipedriver
       result = request(endpoit, :get)
       return [] if result.code != 200
 
-      JSON.parse(result.body)['data'] || []
+      JSON.parse(result.body)['data'].each(&:deep_symbolize_keys!) || []
     end
 
     def create

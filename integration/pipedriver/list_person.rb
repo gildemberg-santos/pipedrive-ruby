@@ -3,9 +3,9 @@ module Integration::Pipedriver
     private def response
       @response ||= find_all('persons').map do |item|
         {
-          id: item['id'],
-          company_id: item['company_id'],
-          name: item['name']
+          id: item[:id],
+          company_id: item[:company_id],
+          name: item[:name]
         }
       end
     end
