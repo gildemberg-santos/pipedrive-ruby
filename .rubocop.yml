@@ -4,3 +4,6 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
   SafeAutoCorrect: true
+
+MethodLength:
+  Max: 20

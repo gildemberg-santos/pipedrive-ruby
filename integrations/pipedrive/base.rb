@@ -21,16 +21,24 @@ module Integrations
 
       def find_all(endpoit)
         result = request(endpoit, :get)
-        return [] if result.code != 200
 
-        JSON.parse(result.body)['data'].each(&:deep_symbolize_keys!) || []
+        if result.code != 200
+          @erros.push(JSON.parse(result.body)['error'])
+          return []
+        end
+
+        JSON.parse(result.body)['data']&.each(&:deep_symbolize_keys!) || []
       end
 
       def create
         result = request(ENDPOINT, :post, @params)
-        @erros.push(JSON.parse(result.body)['error']) and return {} if result.code != 201
 
-        JSON.parse(result.body)['data'].deep_symbolize_keys || {}
+        if result.code != 201
+          @erros.push(JSON.parse(result.body)['error'])
+          return {}
+        end
+
+        JSON.parse(result.body)['data']&.deep_symbolize_keys || {}
       end
 
       def response

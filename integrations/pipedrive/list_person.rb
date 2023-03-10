@@ -8,7 +8,8 @@ module Integrations
           {
             id: item[:id],
             company_id: item[:company_id],
-            name: item[:name]
+            name: item[:name],
+            errors: @erros
           }
         end
       end

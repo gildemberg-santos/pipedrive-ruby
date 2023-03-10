@@ -9,7 +9,8 @@ module Integrations
             id: item[:id],
             key: item[:key],
             name: item[:name],
-            field_type: item[:field_type]
+            field_type: item[:field_type],
+            errors: @erros
           }
         end
       end

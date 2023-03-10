@@ -2,15 +2,17 @@ module Integrations
   module Pipedrive
     class CreateLeadLabel < Base
       ENDPOINT = 'leadLabels'.freeze
-      REQUIRED_NAME = "Por favor, forneça o 'nome' do lead label para prosseguir. Este campo é obrigatório.".freeze
-      REQUIRED_COLOR = "Por favor, forneça a 'cor' do lead label para prosseguir. Este campo é obrigatório.".freeze
+      REQUIRED_NAME = "Por favor, forneça o 'nome' do lead label para \
+      prosseguir. Este campo é obrigatório.".freeze
+      REQUIRED_COLOR = "Por favor, forneça a 'cor' do lead label para \
+      prosseguir. Este campo é obrigatório.".freeze
 
       private
 
       def response
         errors?
         @response ||= create
-        { id: @response[:id], name: @response[:name], erros: @erros }
+        { id: @response[:id], name: @response[:name], errors: @erros }
       end
 
       def errors?

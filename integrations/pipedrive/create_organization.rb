@@ -2,7 +2,8 @@ module Integrations
   module Pipedrive
     class CreateOrganization < Base
       ENDPOINT = 'organizations'.freeze
-      REQUIRED_NAME = "Por favor, forneça o 'nome' da Organização para prosseguir. Este campo é obrigatório.".freeze
+      REQUIRED_NAME = "Por favor, forneça o 'nome' da Organização para \
+      prosseguir. Este campo é obrigatório.".freeze
 
       private
 
@@ -12,7 +13,8 @@ module Integrations
         {
           id: @response[:id],
           company_id: @response[:company_id],
-          name: @response[:name]
+          name: @response[:name],
+          erros: @errors
         }
       end
 

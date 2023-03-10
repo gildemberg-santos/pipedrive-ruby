@@ -13,7 +13,8 @@ module Integrations
             owner_id: item[:owner_id],
             organization_id: item[:organization_id],
             label_ids: item[:label_ids],
-            person_id: item[:person_id]
+            person_id: item[:person_id],
+            errors: @erros
           }
         end
       end

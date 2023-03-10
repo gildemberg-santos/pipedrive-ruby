@@ -7,7 +7,12 @@ module Integrations
 
       def response
         @response ||= find_all(ENDPOINT).map do |item|
-          { id: item[:id], name: item[:name], color: item[:color] }
+          {
+            id: item[:id],
+            name: item[:name],
+            color: item[:color],
+            errors: @erros
+          }
         end
       end
     end
