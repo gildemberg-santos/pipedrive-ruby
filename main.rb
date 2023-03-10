@@ -25,5 +25,5 @@ PARAMS = {
   color: 'red'
 }.freeze
 
-credential = ::Integrations::Pipedrive::Credential.new(COMPANY_DOMAIN, API_TOKEN)
-::Integrations::PipedriveService.new(credential, PARAMS).call
+credential = Integrations::Pipedrive::Credential.new(COMPANY_DOMAIN, API_TOKEN)
+Integrations::PipedriveService.new(credential, PARAMS).call
