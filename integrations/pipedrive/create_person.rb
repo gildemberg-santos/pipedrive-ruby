@@ -1,22 +1,27 @@
-module Integrations::Pipedrive
-  class CreatePerson < Base
-    ENDPOINT = 'persons'
-    REQUIRED_NAME = "Por favor, forneça o 'nome' do contato para prosseguir. Este campo é obrigatório."
+module Integrations
+  module Pipedrive
+    class CreatePerson < Base
+      ENDPOINT = 'persons'.freeze
+      REQUIRED_NAME = "Por favor, forneça o 'nome' do contato para prosseguir. Este campo é obrigatório.".freeze
 
-    private
+      private
 
-    def response
-      @response ||= create
-      { id: @response[:id], name: @response[:name], erros: @erros }
-    end
+      def response
+        errors?
+        @response ||= create
+        { id: @response[:id], name: @response[:name], erros: @erros }
+      end
 
-    def create
-      @erros.push(REQUIRED_NAME) and return {} if @params[:name].blank?
+      def errors?
+        count_error = 0
 
-      result = request(ENDPOINT, :post, @params)
-      @erros.push(JSON.parse(result.body)['error']) and return {} if result.code != 201
+        if @params[:name].blank?
+          @erros.push(REQUIRED_NAME)
+          count_error += 1
+        end
 
-      JSON.parse(result.body)['data'].deep_symbolize_keys || {}
+        count_error.positive?
+      end
     end
   end
 end

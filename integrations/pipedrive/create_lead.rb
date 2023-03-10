@@ -1,22 +1,27 @@
-module Integrations::Pipedrive
-  class CreateLead < Base
-    ENDPOINT = 'leads'
-    REQUIRED_TITLE = "Por favor, forneça o 'título' do lead para prosseguir. Este campo é obrigatório."
+module Integrations
+  module Pipedrive
+    class CreateLead < Base
+      ENDPOINT = 'leads'.freeze
+      REQUIRED_TITLE = "Por favor, forneça o 'título' do lead para prosseguir. Este campo é obrigatório.".freeze
 
-    private
+      private
 
-    def response
-      @response ||= create
-      { id: @response[:id], title: @response[:title], erros: @erros }
-    end
+      def response
+        errors?
+        @response ||= create
+        { id: @response[:id], title: @response[:title], erros: @erros }
+      end
 
-    def create
-      @error.push(REQUIRED_TITLE) and return {} if @params[:title].blank?
+      def errors?
+        count_error = 0
 
-      result = request(ENDPOINT, :post, @params)
-      @erros.push(JSON.parse(result.body)['error']) and return {} if result.code != 201
+        if @params[:title].blank?
+          @erros.push(REQUIRED_TITLE)
+          count_error += 1
+        end
 
-      JSON.parse(result.body)['data'].deep_symbolize_keys || {}
+        count_error.positive?
+      end
     end
   end
 end

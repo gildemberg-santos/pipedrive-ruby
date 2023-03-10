@@ -11,14 +11,14 @@ module Integrations
       leads = Pipedrive::ListLead.new(@credential).call
       person_fields = Pipedrive::ListPersonField.new(@credential).call
 
-      puts "PROGRAMS ========================"
+      puts 'PROGRAMS ========================'
       puts "Owners #{owners}"
       puts "Organizations #{organizations}"
       puts "Leads #{leads}"
       puts "Fields Person #{person_fields}"
 
       # puts "\n\n"
-      
+
       # person = {
       #   name: 'Gildemberg Santos Gomes',
       #   owner_id: owners.first[:id],
@@ -49,7 +49,7 @@ module Integrations
       #   erros.push(response_lead[:erros])
       #   raise StandardError, erros
       # end
-      puts "PROGRAMS ========================"
+      puts 'PROGRAMS ========================'
     end
   end
 end

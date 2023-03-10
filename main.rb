@@ -17,13 +17,13 @@ require './integrations/pipedrive/create_person'
 require './integrations/pipedrive/create_lead_label'
 require './integrations/pipedrive/create_organization'
 
-COMPANY_DOMAIN = 'gilsantos-sandbox'
-API_TOKEN = '99141214036cdd7bf35e96984424be27a1be5b9f'
+COMPANY_DOMAIN = 'gilsantos-sandbox'.freeze
+API_TOKEN = '99141214036cdd7bf35e96984424be27a1be5b9f'.freeze
 PARAMS = {
   name: 'Gildemberg Santos Gomes',
   title: 'Nove Lead',
   color: 'red'
-}
+}.freeze
 
 credential = ::Integrations::Pipedrive::Credential.new(COMPANY_DOMAIN, API_TOKEN)
 ::Integrations::PipedriveService.new(credential, PARAMS).call
